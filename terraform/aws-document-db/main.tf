@@ -30,7 +30,7 @@ data "aws_subnet" "sandbox_app_subnet_1" {
 
 resource "aws_security_group" "docdb_sg" {
   name        = "docdb"
-  description = "dobdb Security Group"
+  description = "docdb Security Group"
   vpc_id      = "${data.aws_vpc.sandbox_vpc.id}"
 
   ingress {
@@ -38,8 +38,7 @@ resource "aws_security_group" "docdb_sg" {
     from_port   = 27017
     to_port     = 27017
     protocol    = "tcp"
-    #cidr_blocks = ["${data.aws_vpc.sandbox_vpc.cidr_block}"]
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${data.aws_vpc.sandbox_vpc.cidr_block}"]
   }
 
   egress {
@@ -97,6 +96,7 @@ resource "aws_docdb_cluster" "default" {
         colony-sandbox-id   = "${var.SANDBOX_ID}"
     }
 }
+
 
 #resource "null_resource" "insert_data" {
 #    count = "${var.INSERT_DATA ? 1 : 0}"
